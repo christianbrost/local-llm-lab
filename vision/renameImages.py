@@ -104,7 +104,9 @@ def process_folder(folder_path):
         
         if rename_image(old_path=image_path, new_name=newPath, extension=ext) == None:
             continue
-        print(f"Changed {image_path} to {newPath}{ext}\n")
+        oldName = os.path.basename(image_path)
+        newName = os.path.basename(newPath) + ext
+        print(f"Vorher: {oldName}  ->  Nachher: {newName}\n")
 
 
 
