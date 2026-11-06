@@ -1,40 +1,40 @@
 # local-llm-lab
 
-kleine skripte zum ki/llm grundlagen lernen, alles lokal mit ollama (kein api key nötig).
+small scripts for learning ai/llm basics, all local with ollama (no api key needed).
 
 ## setup
 
-1. [ollama](https://ollama.com) installieren
-2. modelle pullen:
+1. install [ollama](https://ollama.com)
+2. pull models:
    ```
    ollama pull qwen2.5:7b
    ollama pull nomic-embed-text
    ollama pull llava
    ```
-3. dependencies installieren:
+3. install dependencies:
    ```
    pip install -r requirements.txt
    ```
 
 ## rag/
 
-- `basicAPIUse.py` – einfachster chat-call an ein lokales modell
-- `embedding.py` – text in einen vektor umwandeln (embeddings)
-- `cosineSimilarity.py` – wie ähnlich sind zwei texte, mit cosine similarity gemessen
-- `firstChain.py` – erste langchain pipeline (prompt -> modell -> parser), mit streaming
-- `interactiveCLI.py` – chat loop mit conversation history
-- `fullRAG.py` – komplettes RAG beispiel: text in chunks teilen, embedden, in chromadb speichern, bei einer frage den passenden chunk suchen und dem modell als kontext geben
+- `basicAPIUse.py` – simplest chat call to a local model
+- `embedding.py` – turn text into a vector (embeddings)
+- `cosineSimilarity.py` – how similar are two texts, measured with cosine similarity
+- `firstChain.py` – first langchain pipeline (prompt -> model -> parser), with streaming
+- `interactiveCLI.py` – chat loop with conversation history
+- `fullRAG.py` – complete RAG example: split text into chunks, embed them, store in chromadb, find the matching chunk for a question and give it to the model as context
 
-am besten in der reihenfolge oben lesen, baut so ungefähr aufeinander auf.
+best read in the order above, they build on each other roughly.
 
 ## vision/
 
-- `scanImage.py` – chat loop mit einem vision-modell (llava): bild per pfad einbinden, dann fragen dazu stellen
-- `renameImages.py` – pipeline die einen ordner voller bilder einliest, jedes bild von llava beschreiben lässt, die beschreibung von qwen2.5 zu einem kurzen dateinamen verdichtet und die datei entsprechend umbenennt
+- `scanImage.py` – chat loop with a vision model (llava): load an image by path, then ask questions about it
+- `renameImages.py` – pipeline that reads a folder full of images, has llava describe each image, compresses the description into a short filename with qwen2.5, and renames the file accordingly
 
-## bekannte einschränkungen
+## known limitations
 
-- `fullRAG.py` holt sich nur den einen ähnlichsten chunk (n_results=1), kein reranking
-- history in `interactiveCLI.py` wird nicht gespeichert (geht nach dem beenden verloren)
-- alles auf deutsche prompts ausgelegt, nicht getestet mit anderen sprachen
-- `vision/scanImage.py` hat noch ein paar offene stellen (auskommentierter code, ein debug-print)
+- `fullRAG.py` only fetches the single most similar chunk (n_results=1), no reranking
+- history in `interactiveCLI.py` is not saved (lost after closing)
+- everything designed for german prompts, not tested with other languages
+- `vision/scanImage.py` still has a few loose ends (commented-out code, a debug print)
